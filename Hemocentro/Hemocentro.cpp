@@ -82,14 +82,14 @@ void Hemocentro::verPedidos() const {
         cout << "Tipo Sanguíneo: " << pedido.getTipoSanguineo() << endl;
         cout << "Quantidade: " << pedido.getQuantidade() << " ml" << endl;
         cout << "CPF do Dependente: " << pedido.getCpfDependente() << endl;
-        cout << "Status: " << (pedido.getStatus() ? "Registrado" : "Não Registrado") << endl;
+        cout << "Status: " << (pedido.getStatus() ? "Aceito" : "Em análise") << endl;
         cout << "------------------------" << endl;
     }
 }
 
 void Hemocentro::registrarPedido(const Pedido& pedido) {
     Pedido novoPedido = pedido;
-    novoPedido.setStatus(true); // Marca o pedido como registrado
+    novoPedido.setStatus(true); 
     pedidos.push_back(novoPedido);
 }
 
