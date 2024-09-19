@@ -71,8 +71,7 @@ void Hemocentro::setEstoque(const Estoque& estoque) {
 void Hemocentro::verTriagens() const {
     cout << "Triagens Registradas:" << endl;
     for (const auto& triagem : triagens) {
-        // Imprimir detalhes da triagem, utilizando um método fictício para demonstração
-        // Exemplo: triagem.imprimirDetalhes();
+        triagem.mostrarDetalhes();
     }
 }
 
@@ -100,9 +99,8 @@ void Hemocentro::adicionarAtendente(const Atendente& atendente) {
 
 void Hemocentro::adicionarPedido(const Dependente& dependente, const Pedido& pedido) {
     Pedido novoPedido = pedido;
-    novoPedido.setStatus(false); // Inicialmente, o pedido não está registrado
+    novoPedido.setStatus(false);
     pedidos.push_back(novoPedido);
-    // Aqui você pode implementar lógica adicional para associar o pedido ao dependente, se necessário
 }
 
 void Hemocentro::adicionarDependente(const Dependente& dependente) {

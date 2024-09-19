@@ -1,12 +1,10 @@
 # Projeto Hemocentro
 
-## Descrição
-
-Este projeto é um sistema de gerenciamento de hemocentro desenvolvido em C++. O sistema permite o gerenciamento de doadores, dependentes, atendentes, pedidos de sangue e triagens. O projeto está organizado em diferentes módulos, cada um responsável por uma parte específica do sistema.
+Este projeto é uma simulação de um sistema de gerenciamento de hemocentros, incluindo funcionalidades para triagens, pedidos de sangue, e gestão de estoque.
 
 ## Estrutura do Projeto
 
-A estrutura do projeto é a seguinte:
+O projeto é organizado da seguinte forma:
 
 ```
 src/
@@ -25,6 +23,8 @@ src/
     Triagem/
         Triagem.cpp
         Triagem.h
+        Exame.cpp
+        Exame.h
     Usuarios/
         Atendente/
             Atendente.cpp
@@ -43,81 +43,78 @@ src/
 
 ## Compilação
 
-### Manualmente com `g++`
+Para compilar o projeto, você pode usar o compilador `g++`. Certifique-se de estar na raiz do diretório do projeto e execute o seguinte comando:
 
-1. **Compile os Arquivos Fonte:**
+```sh
+g++ -o programa \
+-IBolsa \
+-IEstoque \
+-IHemocentro \
+-IPedido \
+-ITriagem \
+-IUsuarios/Atendente \
+-IUsuarios/Dependente \
+-IUsuarios/Doador \
+-IUsuarios/Pessoa \
+Bolsa/BolsaDeSangue.cpp \
+Estoque/Estoque.cpp \
+Hemocentro/Hemocentro.cpp \
+Pedido/Pedido.cpp \
+Triagem/Triagem.cpp \
+Usuarios/Atendente/Atendente.cpp \
+Usuarios/Dependente/Dependente.cpp \
+Usuarios/Doador/Doador.cpp \
+Usuarios/Pessoa/Pessoa.cpp \
+Triagem/Exame.cpp \
+main.cpp
+```
 
-   Para compilar o projeto, você precisa compilar todos os arquivos `.cpp` e gerar o executável. Execute os seguintes comandos no terminal:
+### Explicação dos Parâmetros
 
-   ```sh
-   g++ -o programa \
-   src/Bolsa/BolsaDeSangue.cpp \
-   src/Estoque/Estoque.cpp \
-   src/Hemocentro/Hemocentro.cpp \
-   src/Pedido/Pedido.cpp \
-   src/Triagem/Triagem.cpp \
-   src/Usuarios/Atendente/Atendente.cpp \
-   src/Usuarios/Dependente/Dependente.cpp \
-   src/Usuarios/Doador/Doador.cpp \
-   src/Usuarios/Pessoa/Pessoa.cpp \
-   src/main.cpp
-   ```
+- `-o programa`: Define o nome do arquivo executável gerado.
+- `-I<diretório>`: Especifica os diretórios onde o compilador deve procurar os arquivos de cabeçalho (`.h`).
 
-   Este comando compila todos os arquivos de código-fonte e gera um executável chamado `programa`.
+## Execução
 
-2. **Executar o Programa:**
+Após a compilação bem-sucedida, você pode executar o programa gerado com o comando:
 
-   Após a compilação, você pode executar o programa com o comando:
+```sh
+./programa
+```
 
-   ```sh
-   ./programa
-   ```
+Certifique-se de que todos os arquivos `.cpp` e `.h` estão corretamente incluídos e que não há erros de sintaxe ou de caminho de arquivo.
 
-### Usando Visual Studio Code
+## Problemas Comuns
 
-Se você estiver usando o Visual Studio Code (VSCode), o projeto já está configurado com arquivos de configuração no diretório `.vscode`. Siga estas etapas para compilar e executar o projeto:
+Se você encontrar erros relacionados a referências indefinidas, verifique:
 
-1. **Abra o Projeto no VSCode:**
+- Se todos os arquivos `.cpp` estão incluídos na compilação.
+- Se todos os arquivos `.h` necessários estão corretamente incluídos e são encontrados pelo compilador.
 
-   Abra o VSCode e carregue a pasta raiz do projeto.
+Para depurar, você pode compilar com a opção `-g` para gerar informações de depuração:
 
-2. **Compile o Projeto:**
+```sh
+g++ -g -o programa \
+-IBolsa \
+-IEstoque \
+-IHemocentro \
+-IPedido \
+-ITriagem \
+-IUsuarios/Atendente \
+-IUsuarios/Dependente \
+-IUsuarios/Doador \
+-IUsuarios/Pessoa \
+Bolsa/BolsaDeSangue.cpp \
+Estoque/Estoque.cpp \
+Hemocentro/Hemocentro.cpp \
+Pedido/Pedido.cpp \
+Triagem/Triagem.cpp \
+Usuarios/Atendente/Atendente.cpp \
+Usuarios/Dependente/Dependente.cpp \
+Usuarios/Doador/Doador.cpp \
+Usuarios/Pessoa/Pessoa.cpp \
+Triagem/Exame.cpp \
+main.cpp
+```
 
-   - Abra o terminal integrado no VSCode (`Ctrl + ``).
-   - No terminal, execute o comando de compilação:
-
-     ```sh
-     g++ -o programa \
-     src/Bolsa/BolsaDeSangue.cpp \
-     src/Estoque/Estoque.cpp \
-     src/Hemocentro/Hemocentro.cpp \
-     src/Pedido/Pedido.cpp \
-     src/Triagem/Triagem.cpp \
-     src/Usuarios/Atendente/Atendente.cpp \
-     src/Usuarios/Dependente/Dependente.cpp \
-     src/Usuarios/Doador/Doador.cpp \
-     src/Usuarios/Pessoa/Pessoa.cpp \
-     src/main.cpp
-     ```
-
-   - Isso compilará o projeto e criará o executável `programa`.
-
-3. **Executar o Programa:**
-
-   - No terminal integrado, execute o programa gerado:
-
-     ```sh
-     ./programa
-     ```
-
-4. **Configuração de Depuração (opcional):**
-
-   Se desejar configurar a depuração no VSCode, você pode usar o arquivo `.vscode/launch.json`. Certifique-se de que ele está configurado corretamente para o seu projeto. Se já estiver configurado, você pode iniciar a depuração clicando no botão "Run" no menu lateral ou pressionando `F5`.
-
-## Contribuição
-
-Se você deseja contribuir para o projeto, por favor, faça um fork do repositório, crie uma branch para suas alterações e envie um pull request. Certifique-se de testar suas alterações antes de enviar o pull request.
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Se precisar de mais ajuda, consulte a documentação do `g++` ou a seção de problemas conhecidos deste README.

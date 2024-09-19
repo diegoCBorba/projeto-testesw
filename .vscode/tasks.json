@@ -7,25 +7,26 @@
             "command": "g++",
             "args": [
                 "-o", "programa",  // Nome do arquivo executável
-                "-I${workspaceFolder}/Bolsa",    // Diretório de inclusão para Bolsa
-                "-I${workspaceFolder}/Estoque",  // Diretório de inclusão para Estoque
-                "-I${workspaceFolder}/Hemocentro",// Diretório de inclusão para Hemocentro
-                "-I${workspaceFolder}/Pedido",    // Diretório de inclusão para Pedido
-                "-I${workspaceFolder}/Triagem",   // Diretório de inclusão para Triagem
-                "-I${workspaceFolder}/Usuarios/Atendente", // Diretório de inclusão para Atendente
-                "-I${workspaceFolder}/Usuarios/Dependente", // Diretório de inclusão para Dependente
-                "-I${workspaceFolder}/Usuarios/Doador", // Diretório de inclusão para Doador
-                "-I${workspaceFolder}/Usuarios/Pessoa", // Diretório de inclusão para Pessoa
-                "${workspaceFolder}/Bolsa/BolsaDeSangue.cpp",
-                "${workspaceFolder}/Estoque/Estoque.cpp",
-                "${workspaceFolder}/Hemocentro/Hemocentro.cpp",
-                "${workspaceFolder}/Pedido/Pedido.cpp",
-                "${workspaceFolder}/Triagem/Triagem.cpp",
-                "${workspaceFolder}/Usuarios/Atendente/Atendente.cpp",
-                "${workspaceFolder}/Usuarios/Dependente/Dependente.cpp",
-                "${workspaceFolder}/Usuarios/Doador/Doador.cpp",
-                "${workspaceFolder}/Usuarios/Pessoa/Pessoa.cpp",
-                "${workspaceFolder}/main.cpp"
+                "-IBolsa",          // Diretório de inclusão para Bolsa
+                "-IEstoque",        // Diretório de inclusão para Estoque
+                "-IHemocentro",     // Diretório de inclusão para Hemocentro
+                "-IPedido",         // Diretório de inclusão para Pedido
+                "-ITriagem",        // Diretório de inclusão para Triagem
+                "-IUsuarios/Atendente",  // Diretório de inclusão para Atendente
+                "-IUsuarios/Dependente", // Diretório de inclusão para Dependente
+                "-IUsuarios/Doador",     // Diretório de inclusão para Doador
+                "-IUsuarios/Pessoa",     // Diretório de inclusão para Pessoa
+                "Bolsa/BolsaDeSangue.cpp",
+                "Estoque/Estoque.cpp",
+                "Hemocentro/Hemocentro.cpp",
+                "Pedido/Pedido.cpp",
+                "Triagem/Triagem.cpp",
+                "Usuarios/Atendente/Atendente.cpp",
+                "Usuarios/Dependente/Dependente.cpp",
+                "Usuarios/Doador/Doador.cpp",
+                "Usuarios/Pessoa/Pessoa.cpp",
+                "Triagem/Exame.cpp",
+                "main.cpp" 
             ],
             "group": {
                 "kind": "build",

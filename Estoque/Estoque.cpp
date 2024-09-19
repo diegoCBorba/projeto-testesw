@@ -34,13 +34,15 @@ void Estoque::gerarRelatorio() const {
     cout << "Relatório de Estoque de Sangue" << endl;
     cout << "Quantidade Disponível: " << quantidadeDisponivel << endl;
     for (const auto& bolsa : bolsasDeSangue) {
+        tm dataColeta = bolsa.getDataColeta();
+        tm validade = bolsa.getValidade();
         cout << "------------------------" << endl;
         cout << "Tipo: " << bolsa.getTipo() << endl;
         cout << "Volume: " << bolsa.getVolume() << "ml" << endl;
         cout << "CPF Doador: " << bolsa.getCpfDoador() << endl;
         // Asctime funciona diretamente com std::tm
-        // cout << "Data de Coleta: " << asctime(&bolsa.getDataColeta());
-        // cout << "Validade: " << asctime(&bolsa.getValidade());
+        cout << "Data de Coleta: " << asctime(&dataColeta);
+        cout << "Validade: " << asctime(&validade);
         cout << "Código de Identificação: " << bolsa.getCodigoIdentificacao() << endl;
         cout << "------------------------" << endl;
     }
