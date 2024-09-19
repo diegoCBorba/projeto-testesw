@@ -1,164 +1,123 @@
 # Projeto Hemocentro
 
-Este projeto simula um sistema de hemocentro, incluindo funcionalidades para gestão de doadores, estoque de bolsas de sangue, triagens, e mais. 
+## Descrição
+
+Este projeto é um sistema de gerenciamento de hemocentro desenvolvido em C++. O sistema permite o gerenciamento de doadores, dependentes, atendentes, pedidos de sangue e triagens. O projeto está organizado em diferentes módulos, cada um responsável por uma parte específica do sistema.
 
 ## Estrutura do Projeto
 
-O projeto está estruturado da seguinte forma:
+A estrutura do projeto é a seguinte:
 
-- `main.cpp` - Arquivo principal que contém o código de teste.
-- `Usuarios/` - Contém classes relacionadas aos usuários:
-  - `Administrador/` - `Administrador.h`, `Administrador.cpp`
-  - `Atendente/` - `Atendente.h`, `Atendente.cpp`
-  - `Dependente/` - `Dependente.h`, `Dependente.cpp`
-  - `Doador/` - `Doador.h`, `Doador.cpp`
-  - `Pessoa/` - `Pessoa.h`, `Pessoa.cpp`
-- `Bolsa/` - Contém `BolsaDeSangue.h`, `BolsaDeSangue.cpp`
-- `Estoque/` - Contém `Estoque.h`, `Estoque.cpp`
-- `Exame/` - Contém `Exame.h`, `Exame.cpp`
-- `Hemocentro/` - Contém `Hemocentro.h`, `Hemocentro.cpp`
-- `Pedido/` - Contém `Pedido.h`, `Pedido.cpp`
-- `Triagem/` - Contém `Triagem.h`, `Triagem.cpp`
-- `Hospital/` - Contém `Hospital.h`, `Hospital.cpp`
+```
+src/
+    Bolsa/
+        BolsaDeSangue.cpp
+        BolsaDeSangue.h
+    Estoque/
+        Estoque.cpp
+        Estoque.h
+    Hemocentro/
+        Hemocentro.cpp
+        Hemocentro.h
+    Pedido/
+        Pedido.cpp
+        Pedido.h
+    Triagem/
+        Triagem.cpp
+        Triagem.h
+    Usuarios/
+        Atendente/
+            Atendente.cpp
+            Atendente.h
+        Dependente/
+            Dependente.cpp
+            Dependente.h
+        Doador/
+            Doador.cpp
+            Doador.h
+        Pessoa/
+            Pessoa.cpp
+            Pessoa.h
+    main.cpp
+```
 
 ## Compilação
 
-Para compilar o projeto, você pode usar o compilador `g++` com o seguinte comando:
+### Manualmente com `g++`
 
-```sh
-g++ -o programa \
-    main.cpp \
-    Usuarios/Administrador/Administrador.cpp \
-    Usuarios/Atendente/Atendente.cpp \
-    Usuarios/Dependente/Dependente.cpp \
-    Usuarios/Doador/Doador.cpp \
-    Usuarios/Pessoa/Pessoa.cpp \
-    Bolsa/BolsaDeSangue.cpp \
-    Estoque/Estoque.cpp \
-    Exame/Exame.cpp \
-    Hemocentro/Hemocentro.cpp \
-    Pedido/Pedido.cpp \
-    Triagem/Triagem.cpp \
-    Hospital/Hospital.cpp \
-    -IUsuarios \
-    -IBolsa \
-    -IEstoque \
-    -IExame \
-    -IHemocentro \
-    -IPedido \
-    -ITriagem \
-    -IHospital
-```
+1. **Compile os Arquivos Fonte:**
 
-Este comando compila todos os arquivos `.cpp` e gera um executável chamado `programa`.
+   Para compilar o projeto, você precisa compilar todos os arquivos `.cpp` e gerar o executável. Execute os seguintes comandos no terminal:
 
-## Execução
+   ```sh
+   g++ -o programa \
+   src/Bolsa/BolsaDeSangue.cpp \
+   src/Estoque/Estoque.cpp \
+   src/Hemocentro/Hemocentro.cpp \
+   src/Pedido/Pedido.cpp \
+   src/Triagem/Triagem.cpp \
+   src/Usuarios/Atendente/Atendente.cpp \
+   src/Usuarios/Dependente/Dependente.cpp \
+   src/Usuarios/Doador/Doador.cpp \
+   src/Usuarios/Pessoa/Pessoa.cpp \
+   src/main.cpp
+   ```
 
-Após a compilação, você pode rodar o programa executável gerado com o seguinte comando:
+   Este comando compila todos os arquivos de código-fonte e gera um executável chamado `programa`.
 
-```sh
-./programa
-```
+2. **Executar o Programa:**
 
-Isso irá iniciar o programa e executar o código de teste definido no `main.cpp`.
+   Após a compilação, você pode executar o programa com o comando:
 
-## Configuração no VS Code
+   ```sh
+   ./programa
+   ```
 
-Para facilitar o desenvolvimento e a compilação, você pode configurar o VS Code para compilar e depurar o projeto.
+### Usando Visual Studio Code
 
-### Configuração de Compilação
+Se você estiver usando o Visual Studio Code (VSCode), o projeto já está configurado com arquivos de configuração no diretório `.vscode`. Siga estas etapas para compilar e executar o projeto:
 
-Crie um arquivo `.vscode/tasks.json` com o seguinte conteúdo para definir a tarefa de build:
+1. **Abra o Projeto no VSCode:**
 
-```json
-{
-  "version": "2.0.0",
-  "tasks": [
-      {
-          "label": "build",
-          "command": "g++",
-          "args": [
-              "-o", "programa", 
-              "main.cpp",
-              "Usuarios/Administrador/Administrador.cpp",
-              "Usuarios/Atendente/Atendente.cpp",
-              "Usuarios/Dependente/Dependente.cpp",
-              "Usuarios/Doador/Doador.cpp",
-              "Usuarios/Pessoa/Pessoa.cpp",
-              "Bolsa/BolsaDeSangue.cpp",
-              "Estoque/Estoque.cpp",
-              "Exame/Exame.cpp",
-              "Hemocentro/Hemocentro.cpp",
-              "Pedido/Pedido.cpp",
-              "Triagem/Triagem.cpp",
-              "Hospital/Hospital.cpp",
-              "-IUsuarios",
-              "-IBolsa",
-              "-IEstoque",
-              "-IExame",
-              "-IHemocentro",
-              "-IPedido",
-              "-ITriagem",
-              "-IHospital"
-          ],
-          "group": {
-              "kind": "build",
-              "isDefault": true
-          },
-          "problemMatcher": ["$gcc"],
-          "detail": "Compila o projeto C++."
-      }
-  ]
-}
-```
+   Abra o VSCode e carregue a pasta raiz do projeto.
 
-### Configuração de Debug
+2. **Compile o Projeto:**
 
-Crie um arquivo `.vscode/launch.json` com o seguinte conteúdo para configurar o debug:
+   - Abra o terminal integrado no VSCode (`Ctrl + ``).
+   - No terminal, execute o comando de compilação:
 
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
-      {
-          "name": "Debug",
-          "type": "cppdbg",
-          "request": "launch",
-          "program": "${workspaceFolder}/programa",
-          "args": [],
-          "stopAtEntry": false,
-          "cwd": "${workspaceFolder}",
-          "environment": [],
-          "externalConsole": false,
-          "MIMode": "gdb",
-          "setupCommands": [
-              {
-                  "description": "Enable pretty-printing for gdb",
-                  "ignoreFailures": true,
-                  "text": "-enable-pretty-printing"
-              }
-          ],
-          "preLaunchTask": "build",
-          "miDebuggerPath": "/usr/bin/gdb",
-          "internalConsoleOptions": "openOnSessionStart",
-          "logging": {
-              "engineLogging": true
-          }
-      }
-  ]
-}
-```
+     ```sh
+     g++ -o programa \
+     src/Bolsa/BolsaDeSangue.cpp \
+     src/Estoque/Estoque.cpp \
+     src/Hemocentro/Hemocentro.cpp \
+     src/Pedido/Pedido.cpp \
+     src/Triagem/Triagem.cpp \
+     src/Usuarios/Atendente/Atendente.cpp \
+     src/Usuarios/Dependente/Dependente.cpp \
+     src/Usuarios/Doador/Doador.cpp \
+     src/Usuarios/Pessoa/Pessoa.cpp \
+     src/main.cpp
+     ```
 
-Isso permitirá compilar e depurar o projeto diretamente do VS Code.
+   - Isso compilará o projeto e criará o executável `programa`.
+
+3. **Executar o Programa:**
+
+   - No terminal integrado, execute o programa gerado:
+
+     ```sh
+     ./programa
+     ```
+
+4. **Configuração de Depuração (opcional):**
+
+   Se desejar configurar a depuração no VSCode, você pode usar o arquivo `.vscode/launch.json`. Certifique-se de que ele está configurado corretamente para o seu projeto. Se já estiver configurado, você pode iniciar a depuração clicando no botão "Run" no menu lateral ou pressionando `F5`.
 
 ## Contribuição
 
-Se você deseja contribuir para este projeto, por favor, faça um fork e envie um pull request com suas alterações.
+Se você deseja contribuir para o projeto, por favor, faça um fork do repositório, crie uma branch para suas alterações e envie um pull request. Certifique-se de testar suas alterações antes de enviar o pull request.
 
 ## Licença
 
-Este projeto está licenciado sob a [Licença XYZ](LICENSE).
-
----
-
-Se você tiver dúvidas ou encontrar problemas, sinta-se à vontade para abrir uma issue no repositório!
+Este projeto está licenciado sob a [MIT License](LICENSE).

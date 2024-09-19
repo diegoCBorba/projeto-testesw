@@ -1,23 +1,22 @@
 #ifndef DEPENDENTE_H
 #define DEPENDENTE_H
 
-#include <iostream>
-#include <string>
+#include "Pessoa.h"
+#include "Pedido.h"
 #include <vector>
-#include "../Pessoa/Pessoa.h"
 
 using namespace std;
 
 class Dependente : public Pessoa {
 private:
-    vector<string> historicoPedidos;  // Para armazenar pedidos (futuramente será outra classe)
+    vector<Pedido> historicoDePedidos;
 
 public:
-    Dependente(int id, string cpf, string nome, string dataNascimento, string sexo,
-               string tipoSanguineo, string endereco, string telefone);
+    Dependente(string cpf, string nome, tm dataNascimento, string sexo, string tipoSanguineo, string endereco, string telefone);
 
-    void adicionarPedido(const string& pedido);
-    const vector<string>& getHistoricoPedidos() const;
+    vector<Pedido> getHistoricoDePedidos() const;
+
+    Pedido fazerPedido(const Pedido& pedido);
 };
 
 #endif

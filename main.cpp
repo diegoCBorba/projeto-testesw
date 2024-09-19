@@ -1,48 +1,60 @@
 #include <iostream>
-#include <string>
-#include <vector>
+#include "Pessoa.h"
+#include "Doador.h"
+#include "Dependente.h"
+#include "Atendente.h"
+#include "Pedido.h"
+#include "Triagem.h"
+#include "BolsaDeSangue.h"
+#include "Estoque.h"
+#include "Hemocentro.h"
 
-using namespace std;
-
-#include <iostream>
-#include "Usuarios/Doador/Doador.h"
-#include "Usuarios/Administrador/Administrador.h"
-#include "Usuarios/Dependente/Dependente.h"
-#include "Usuarios/Atendente/Atendente.h"
-#include "Bolsa/BolsaDeSangue.h"
-#include "Estoque/Estoque.h"
-#include "Hemocentro/Hemocentro.h"
-#include "Pedido/Pedido.h"
-#include "Exame/Exame.h"
-#include "Triagem/Triagem.h"
+// Função auxiliar para imprimir data
+void imprimirData(const tm& data) {
+    std::cout << data.tm_mday << "/" << (data.tm_mon + 1) << "/" << (data.tm_year + 1900);
+}
 
 int main() {
-    Doador doador1(1, "12345678900", "João Silva", "01/01/1980", "Masculino", "O+", "Rua A, 123", "99999-9999");
+    // Criação de um Hemocentro
+    Hemocentro hemocentro("Hemocentro Central", "Rua das Flores, 123", "1234-5678", "contato@hemocentro.com", "Dr. João", "São Paulo", "SP");
 
-    BolsaDeSangue bolsa1("O+", 0.5, "10/09/2024", "10/12/2024", "BOLSA123");
+    // Criação de alguns objetos Pessoa e derivados
+    tm dataNascimento = {0, 0, 0, 15, 6, 90}; // 15/07/1990
+    Dependente dep1("12345678900", "Ana Silva", dataNascimento, "F", "O+", "Rua A, 10", "9876-5432");
+    Doador doa1("98765432100", "Carlos Souza", dataNascimento, "M", "A-", "Rua B, 20", "8765-4321");
+    Atendente atend1("45678912300", "Julia Costa", dataNascimento, "F", "B+", "Rua C, 30", "7654-3210");
 
-    Estoque estoque1;
-    estoque1.adicionarAoEstoque(bolsa1);
+    // Adiciona Dependente e Atendente ao Hemocentro
+    hemocentro.adicionarDependente(dep1);
+    hemocentro.adicionarAtendente(atend1);
 
-    estoque1.gerarRelatorio();
+    // Criação e cadastro de um Pedido
+    Pedido pedido1(1, "O+", 500, "12345678900", false);
+    hemocentro.registrarPedido(pedido1);
 
-    Hemocentro hemocentro1("Hemocentro Central", "Rua B, 456", "88888-8888", "contato@hemocentro.com", 
-                           "Maria Souza", "Cidade XYZ", "Estado ABC");
-    hemocentro1.adicionarEstoque(estoque1);
+    // Criação e cadastro de uma Triagem
+    Triagem triagem1(dataNascimento);
+    hemocentro.cadastrarTriagem(doa1, triagem1);
 
-    Pedido pedido1("O+", 2);
-    pedido1.registrarPedido();
+    // Adicionar uma bolsa de sangue ao estoque
+    BolsaDeSangue bolsa1{"O+", 450, {15, 7, 2024}, {15, 7, 2025}, "98765432100", "B1234"};
+    Estoque estoque;
+    estoque.adicionarEstoque(bolsa1);
+    hemocentro.setEstoque(estoque);
 
-    hemocentro1.registrarPedido(pedido1);
+    // Testar métodos de visualização
+    std::cout << "Visualizando pedidos:" << std::endl;
+    hemocentro.verPedidos();
 
-    hemocentro1.gerarRelatorioEstoque();
+    std::cout << "Visualizando triagens:" << std::endl;
+    hemocentro.verTriagens();
 
-    Exame exame1("HIV", "Negativo");
+    // Testando o método de adicionar pedido para dependente
+    Pedido pedido2(2, "A-", 300, "12345678900", false);
+    hemocentro.adicionarPedido(dep1, pedido2);
 
-    Triagem triagem1("10/09/2024");
-    triagem1.registrarExame(exame1);
-
-    triagem1.exibirExames();
+    std::cout << "Pedidos após adicionar novo pedido para dependente:" << std::endl;
+    hemocentro.verPedidos();
 
     return 0;
 }

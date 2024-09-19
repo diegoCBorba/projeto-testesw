@@ -1,24 +1,26 @@
 #ifndef DOADOR_H
 #define DOADOR_H
 
-#include "../Pessoa/Pessoa.h"
+#include "Pessoa.h"
+#include "BolsaDeSangue.h"
+#include "Triagem.h"
 #include <vector>
-#include <string>
-#include <iostream>
 
 using namespace std;
 
 class Doador : public Pessoa {
 private:
-    vector<string> historicoDoacoes;
+    vector<BolsaDeSangue> historicoDeDoacoes;
+    vector<Triagem> historicoDeTriagens;
 
 public:
-    Doador(int id, string cpf, string nome, string dataNascimento, string sexo,
-           string tipoSanguineo, string endereco, string telefone);
+    Doador(string cpf, string nome, tm dataNascimento, string sexo, string tipoSanguineo, string endereco, string telefone);
 
-    void doarBolsa();
-    void fazerTriagem();
-    const vector<string>& getHistoricoDoacoes() const;
+    vector<BolsaDeSangue> getHistoricoDeDoacoes() const;
+    vector<Triagem> getHistoricoDeTriagens() const;
+
+    BolsaDeSangue doarBolsa(const BolsaDeSangue& bolsa);
+    Triagem fazerTrigem(const Triagem& triagem);
 };
 
 #endif

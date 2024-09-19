@@ -1,30 +1,25 @@
 #ifndef TRIAGEM_H
 #define TRIAGEM_H
 
-#include <iostream>
-#include <string>
 #include <vector>
-#include "../Exame/Exame.h"
+#include <ctime>
+#include "Exame.h"
 
 using namespace std;
 
 class Triagem {
 private:
-    string dataExame;
-    vector<Exame> listaExames;
+    tm dataExame;
+    vector<Exame> exames;
 
 public:
-    Triagem(string dataExame);
+    Triagem(tm dataExame);
 
-    string getDataExame() const;
+    tm getDataExame() const;
+    vector<Exame> getExames() const;
 
-    // Método para registrar um exame
-    void registrarExame(const Exame& exame);
-
-    const vector<Exame>& getListaExames() const;
-
-    // Método para exibir os exames registrados (opcional)
-    void exibirExames() const;
+    void setDataExame(tm dataExame);
+    void cadastrarExame(const Exame& exame);
 };
 
 #endif

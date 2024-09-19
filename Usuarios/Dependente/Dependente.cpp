@@ -1,13 +1,13 @@
 #include "Dependente.h"
 
-Dependente::Dependente(int id, string cpf, string nome, string dataNascimento, string sexo,
-                       string tipoSanguineo, string endereco, string telefone)
-    : Pessoa(id, cpf, nome, dataNascimento, sexo, tipoSanguineo, endereco, telefone) {}
+Dependente::Dependente(string cpf, string nome, tm dataNascimento, string sexo, string tipoSanguineo, string endereco, string telefone)
+    : Pessoa(cpf, nome, dataNascimento, sexo, tipoSanguineo, endereco, telefone) {}
 
-void Dependente::adicionarPedido(const string& pedido) {
-    historicoPedidos.push_back(pedido);
+vector<Pedido> Dependente::getHistoricoDePedidos() const {
+    return historicoDePedidos;
 }
 
-const vector<string>& Dependente::getHistoricoPedidos() const {
-    return historicoPedidos;
+Pedido Dependente::fazerPedido(const Pedido& pedido) {
+    historicoDePedidos.push_back(pedido);
+    return pedido;
 }

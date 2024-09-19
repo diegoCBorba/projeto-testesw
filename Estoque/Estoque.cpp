@@ -1,42 +1,56 @@
 #include "Estoque.h"
+#include <iostream>
+#include <ctime>  // Para std::tm e asctime
+
+using namespace std;
 
 Estoque::Estoque() : quantidadeDisponivel(0) {}
 
-int Estoque::getQuantidadeDisponivel() const { return quantidadeDisponivel; }
+int Estoque::getQuantidadeDisponivel() const {
+    return quantidadeDisponivel;
+}
 
-void Estoque::adicionarAoEstoque(const BolsaDeSangue& bolsa) {
-    bolsas.push_back(bolsa);
+vector<BolsaDeSangue> Estoque::getBolsasDeSangue() const {
+    return bolsasDeSangue;
+}
+
+void Estoque::adicionarEstoque(const BolsaDeSangue& bolsa) {
+    bolsasDeSangue.push_back(bolsa);
     quantidadeDisponivel++;
 }
 
-bool Estoque::retirarDoEstoque(const string& codigoIdentificacao) {
-    for (size_t i = 0; i < bolsas.size(); i++) {
-        if (bolsas[i].getCodigoIdentificacao() == codigoIdentificacao) {
-            bolsas.erase(bolsas.begin() + i);
+bool Estoque::retirarEstoque(const string& codigoIdentificacao) {
+    for (size_t i = 0; i < bolsasDeSangue.size(); i++) {
+        if (bolsasDeSangue[i].getCodigoIdentificacao() == codigoIdentificacao) {
+            bolsasDeSangue.erase(bolsasDeSangue.begin() + i);
             quantidadeDisponivel--;
-            return true; // Bolsa retirada com sucesso
+            return true; // Sucesso ao remover
         }
     }
     return false; // Bolsa não encontrada
 }
 
 void Estoque::gerarRelatorio() const {
-    cout << "Relatório do Estoque:" << endl;
-    cout << "Quantidade disponível: " << quantidadeDisponivel << endl;
-    for (const BolsaDeSangue& bolsa : bolsas) {
-        cout << "Bolsa: " << bolsa.getCodigoIdentificacao() 
-             << ", Tipo: " << bolsa.getTipo()
-             << ", Volume: " << bolsa.getVolume() << " litros"
-             << ", Data de Coleta: " << bolsa.getDataColeta()
-             << ", Validade: " << bolsa.getValidade() << endl;
+    cout << "Relatório de Estoque de Sangue" << endl;
+    cout << "Quantidade Disponível: " << quantidadeDisponivel << endl;
+    for (const auto& bolsa : bolsasDeSangue) {
+        cout << "------------------------" << endl;
+        cout << "Tipo: " << bolsa.getTipo() << endl;
+        cout << "Volume: " << bolsa.getVolume() << "ml" << endl;
+        cout << "CPF Doador: " << bolsa.getCpfDoador() << endl;
+        // Asctime funciona diretamente com std::tm
+        // cout << "Data de Coleta: " << asctime(&bolsa.getDataColeta());
+        // cout << "Validade: " << asctime(&bolsa.getValidade());
+        cout << "Código de Identificação: " << bolsa.getCodigoIdentificacao() << endl;
+        cout << "------------------------" << endl;
     }
 }
 
-bool Estoque::verificarDisponibilidade(const string& tipoSanguineo) const {
-    for (const BolsaDeSangue& bolsa : bolsas) {
-        if (bolsa.getTipo() == tipoSanguineo) {
-            return true;
+bool Estoque::verificarDisponibilidade(const string& tipo) const {
+    for (const auto& bolsa : bolsasDeSangue) {
+        if (bolsa.getTipo() == tipo && bolsa.VerificarValidade()) {
+            return true; // Existe uma bolsa válida deste tipo
         }
     }
-    return false;
+    return false; // Não há bolsas válidas do tipo solicitado
 }

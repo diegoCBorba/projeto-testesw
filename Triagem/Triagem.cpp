@@ -1,21 +1,19 @@
 #include "Triagem.h"
 
-Triagem::Triagem(string dataExame) : dataExame(dataExame) {}
+Triagem::Triagem(tm dataExame) : dataExame(dataExame) {}
 
-string Triagem::getDataExame() const { return dataExame; }
-
-void Triagem::registrarExame(const Exame& exame) {
-    listaExames.push_back(exame);
+tm Triagem::getDataExame() const {
+    return dataExame;
 }
 
-const vector<Exame>& Triagem::getListaExames() const {
-    return listaExames;
+vector<Exame> Triagem::getExames() const {
+    return exames;
 }
 
-void Triagem::exibirExames() const {
-    cout << "Exames realizados em: " << dataExame << endl;
-    for (const Exame& exame : listaExames) {
-        cout << "Tipo: " << exame.getTipo() 
-             << ", Resultado: " << exame.getResultado() << endl;
-    }
+void Triagem::setDataExame(tm dataExame) {
+    this->dataExame = dataExame;
+}
+
+void Triagem::cadastrarExame(const Exame& exame) {
+    exames.push_back(exame);
 }

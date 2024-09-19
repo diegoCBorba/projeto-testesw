@@ -1,18 +1,22 @@
 #include "Doador.h"
 
-Doador::Doador(int id, string cpf, string nome, string dataNascimento, string sexo,
-               string tipoSanguineo, string endereco, string telefone)
-    : Pessoa(id, cpf, nome, dataNascimento, sexo, tipoSanguineo, endereco, telefone) {}
+Doador::Doador(string cpf, string nome, tm dataNascimento, string sexo, string tipoSanguineo, string endereco, string telefone)
+    : Pessoa(cpf, nome, dataNascimento, sexo, tipoSanguineo, endereco, telefone) {}
 
-void Doador::doarBolsa() {
-    cout << "Doando bolsa de sangue." << endl;
-    historicoDoacoes.push_back("Bolsa doada em [data]");
+vector<BolsaDeSangue> Doador::getHistoricoDeDoacoes() const {
+    return historicoDeDoacoes;
 }
 
-void Doador::fazerTriagem() {
-    cout << "Realizando triagem do doador." << endl;
+vector<Triagem> Doador::getHistoricoDeTriagens() const {
+    return historicoDeTriagens;
 }
 
-const vector<string>& Doador::getHistoricoDoacoes() const {
-    return historicoDoacoes;
+BolsaDeSangue Doador::doarBolsa(const BolsaDeSangue& bolsa) {
+    historicoDeDoacoes.push_back(bolsa);
+    return bolsa;
+}
+
+Triagem Doador::fazerTrigem(const Triagem& triagem) {
+    historicoDeTriagens.push_back(triagem);
+    return triagem;
 }

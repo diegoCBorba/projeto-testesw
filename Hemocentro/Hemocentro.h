@@ -1,17 +1,19 @@
 #ifndef HEMOCENTRO_H
 #define HEMOCENTRO_H
 
-#include <iostream>
 #include <string>
 #include <vector>
-#include "../Estoque/Estoque.h"
-#include "../Pedido/Pedido.h"
+#include "Dependente.h"
+#include "Doador.h"
+#include "Atendente.h"
+#include "Pedido.h"
+#include "Triagem.h"
+#include "Estoque.h"
 
 using namespace std;
 
 class Hemocentro {
 private:
-    int id;
     string nome;
     string endereco;
     string telefone;
@@ -19,16 +21,19 @@ private:
     string responsavel;
     string cidade;
     string estado;
-    vector<Estoque> capacidadeEstoque;  // Lista de estoques
+
+    vector<Dependente> dependentes;
+    vector<Doador> doadores;
+    vector<Atendente> atendentes;
+    vector<Pedido> pedidos;
+    vector<Triagem> triagens;
+
+    Estoque estoque;
 
 public:
-    Hemocentro(string nome, string endereco, string telefone, string email, 
-               string responsavel, string cidade, string estado);
+    Hemocentro(string nome, string endereco, string telefone, string email, string responsavel, string cidade, string estado);
 
-    // Método para registrar um pedido
-    void registrarPedido(const Pedido& pedido);
-
-    // Métodos getters para acessar os atributos
+    // Métodos de acesso aos atributos
     string getNome() const;
     string getEndereco() const;
     string getTelefone() const;
@@ -36,12 +41,25 @@ public:
     string getResponsavel() const;
     string getCidade() const;
     string getEstado() const;
+    Estoque getEstoque() const;
 
-    // Adicionar um estoque ao hemocentro
-    void adicionarEstoque(const Estoque& estoque);
+    void setNome(const string& nome);
+    void setEndereco(const string& endereco);
+    void setTelefone(const string& telefone);
+    void setEmail(const string& email);
+    void setResponsavel(const string& responsavel);
+    void setCidade(const string& cidade);
+    void setEstado(const string& estado);
+    void setEstoque(const Estoque& estoque);
 
-    // Gerar um relatório de estoques no hemocentro
-    void gerarRelatorioEstoque() const;
+    // Métodos de gerenciamento
+    void verTriagens() const;
+    void verPedidos() const;
+    void registrarPedido(const Pedido& pedido);
+    void adicionarAtendente(const Atendente& atendente);
+    void adicionarPedido(const Dependente& dependente, const Pedido& pedido);
+    void adicionarDependente(const Dependente& dependente);
+    void cadastrarTriagem(Doador& doador, const Triagem& triagem);
 };
 
 #endif
